@@ -17,7 +17,7 @@ basic_display=("查看桌面环境" "查看显示服务器" "显示桌面会话"
 disk=("磁盘详细分区" "磁盘关系" "磁盘空间/挂载" "内存查看")
 process=("查看全部进程" "查看当前用户进程")
 kernel=("内核全部信息" "显示内核发行版本号" "处理器架构")
-cpu=("cpu基本信息" "详细信息需要安装hwinfo" "温度")
+cpu=("cpu基本信息" "详细信息需要安装hwinfo（全线程）" "温度")
 gpu=("查看显卡型号" "图像显示")
 while true; do
     for index in "${!Operation[@]}"; do
@@ -63,7 +63,7 @@ while true; do
         3)
             echo $DESKTOP_SESSION
             ;;
-        4) 
+        4)
             printf "现在的显示管理器为: "
             systemctl status display-manager | head -n 1 | cut -c 4-20 | cut -d '.' -f1
             ;;
@@ -72,7 +72,7 @@ while true; do
         printf ${NC} #颜色清除
         echo ""
         ;;
-        
+
     3)
 
         for index in "${!Display_Version[@]}"; do
@@ -158,7 +158,7 @@ while true; do
     7)
         echo "1.$GREEN CPU" $NC
         echo "2.$GREEN GPU" $NC
-        read -p "输入的操作7：${YELLOW}" operation7 
+        read -p "输入的操作7：${YELLOW}" operation7
         printf $NC
 
         case $operation7 in
@@ -186,7 +186,7 @@ while true; do
                         echo "CPU温度: $(($(cat /sys/class/thermal/thermal_zone0/temp)/1000))°C"
                 #         ;;
                 #     2)
-                #       echo "CPU温: "(math (cat /sys/class/thermal/thermal_zone0/temp) / 1000)"°C"度） 
+                #       echo "CPU温: "(math (cat /sys/class/thermal/thermal_zone0/temp) / 1000)"°C"度）
                 #         ;;
                 # esac
 
@@ -209,7 +209,7 @@ while true; do
                             lspci | grep -i vga
                             ;;
                         2)
-                            sudo lshw -C display 
+                            sudo lshw -C display
                             ;;
                     esac
                     ;;
@@ -220,7 +220,7 @@ while true; do
             printf ${NC}
 
             ;;
-        
+
         esac
         echo ""
         ;;
